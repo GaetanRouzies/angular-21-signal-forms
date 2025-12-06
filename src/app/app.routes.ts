@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router'
-import { ProductList } from './product-list/product-list'
-import { ReactiveProductForm } from './reactive-product-form/reactive-product-form'
-import { SignalProductForm } from './signal-product-form/signal-product-form'
+import { ProductList } from './products/product-list/product-list'
+import { ReactiveProductForm } from './products/reactive-product-form/reactive-product-form'
+import { SignalProductForm } from './products/signal-product-form/signal-product-form'
 
 export const routes: Routes = [
   {

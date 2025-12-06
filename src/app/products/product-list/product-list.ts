@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { Router, RouterModule } from '@angular/router'
-import { ProductService } from '../services/product.service'
+import { ProductService } from '../product.service'
 import { Subject, startWith, switchMap } from 'rxjs'
 
 @Component({

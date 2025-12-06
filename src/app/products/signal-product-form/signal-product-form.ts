@@ -2,9 +2,9 @@ import { Component, effect, inject, input, signal } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { Field, form, min, minLength, required } from '@angular/forms/signals'
 import { Router, RouterModule } from '@angular/router'
-import { Product } from '../models/product.interface'
-import { RatingInputNew } from '../rating-input-new/rating-input-new'
-import { ProductService } from '../services/product.service'
+import { Product } from '../product.interface'
+import { RatingInputNew } from '../../shared/rating-input-new/rating-input-new'
+import { ProductService } from '../product.service'
 
 @Component({
   selector: 'app-signal-product-form',
@@ -34,7 +34,7 @@ export class SignalProductForm {
     effect(() => {
       const productId = this.productId()
       if (productId) {
-        this.productService.getById(productId).subscribe((product) => {
+        this.productService.getById(productId).subscribe((product: Product) => {
           this.model.set({
             name: product.name,
             price: product.price,
