@@ -1,4 +1,4 @@
-<h1>{{ product() ? 'Edit Product' : 'Create Product' }}</h1>
+<h1 class="mb-3">{{ productId() ? 'Edit Product' : 'Create Product' }} (Signal)</h1>
 
 <form (ngSubmit)="onSubmit()">
   <div class="mb-3">
@@ -40,5 +40,10 @@
     }
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="d-flex gap-2">
+    <button type="button" class="btn btn-outline-secondary" routerLink="/products">Cancel</button>
+    <button type="submit" class="btn btn-info">
+      {{ productId() ? 'Update' : 'Create' }}
+    </button>
+  </div>
 </form>

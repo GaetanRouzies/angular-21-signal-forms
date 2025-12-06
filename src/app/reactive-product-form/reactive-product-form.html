@@ -1,4 +1,4 @@
-<h1>{{ product() ? 'Edit Product' : 'Create Product' }}</h1>
+<h1 class="mb-3">{{ productId() ? 'Edit Product' : 'Create Product' }} (Reactive)</h1>
 
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <div class="mb-3">
@@ -38,8 +38,13 @@
       [class.is-invalid]="formGroup.controls.rating.invalid && (formGroup.controls.rating.touched || formGroup.controls.rating.dirty)"
       formControlName="rating"
     ></app-rating-input-old>
-    <small class="invalid-feedback"> Rating is required </small>
+    <small class="invalid-feedback"> Rating must be at least 1 </small>
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="d-flex gap-2">
+    <button type="button" class="btn btn-outline-secondary" routerLink="/products">Cancel</button>
+    <button type="submit" class="btn btn-primary">
+      {{ productId() ? 'Update' : 'Create' }}
+    </button>
+  </div>
 </form>

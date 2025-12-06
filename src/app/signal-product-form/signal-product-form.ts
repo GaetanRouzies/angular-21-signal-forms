@@ -1,17 +1,21 @@
-import { Component, effect, input, signal } from '@angular/core'
-import { Field, form, min, minLength, required } from '@angular/forms/signals'
+import { Component, effect, inject, input, signal } from '@angular/core'
 import { FormsModule } from '@angular/forms'
+import { Field, form, min, minLength, required } from '@angular/forms/signals'
+import { Router, RouterModule } from '@angular/router'
 import { Product } from '../models/product.interface'
 import { RatingInputNew } from '../rating-input-new/rating-input-new'
-import { JsonPipe } from '@angular/common'
+import { ProductService } from '../services/product.service'
 
 @Component({
   selector: 'app-signal-product-form',
-  imports: [Field, RatingInputNew, FormsModule, JsonPipe],
+  imports: [Field, RatingInputNew, FormsModule, RouterModule],
   templateUrl: './signal-product-form.html',
 })
 export class SignalProductForm {
-  product = input<Product>()
+  private productService = inject(ProductService)
+  private router = inject(Router)
+
+  productId = input<number>()
 
   model = signal<Omit<Product, 'id'>>({
     name: '',
@@ -28,12 +32,14 @@ export class SignalProductForm {
 
   constructor() {
     effect(() => {
-      const product = this.product()
-      if (product) {
-        this.model.set({
-          name: product.name,
-          price: product.price,
-          rating: product.rating,
+      const productId = this.productId()
+      if (productId) {
+        this.productService.getById(productId).subscribe((product) => {
+          this.model.set({
+            name: product.name,
+            price: product.price,
+            rating: product.rating,
+          })
         })
       }
     })
@@ -45,6 +51,19 @@ export class SignalProductForm {
     this.form.rating().markAsTouched()
     if (this.form().invalid()) return
 
-    console.log('Form value:', this.form().value())
+    const formValue = this.form().value()
+
+    const productId = this.productId()
+    if (productId) {
+      // Update
+      this.productService.update(productId, formValue).subscribe(() => {
+        this.router.navigate(['/products'])
+      })
+    } else {
+      // Create
+      this.productService.create(formValue).subscribe(() => {
+        this.router.navigate(['/products'])
+      })
+    }
   }
 }

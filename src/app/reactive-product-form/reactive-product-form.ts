@@ -1,43 +1,59 @@
-import { Component, effect, input } from '@angular/core'
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
-import { Product } from '../models/product.interface'
+import { Component, effect, inject, input, signal } from '@angular/core'
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
+import { Router, RouterModule } from '@angular/router'
 import { RatingInputOld } from '../rating-input-old/rating-input-old'
+import { ProductService } from '../services/product.service'
 
 @Component({
   selector: 'app-reactive-product-form',
-  imports: [ReactiveFormsModule, RatingInputOld],
+  imports: [ReactiveFormsModule, RatingInputOld, RouterModule],
   templateUrl: './reactive-product-form.html',
 })
 export class ReactiveProductForm {
-  product = input<Product>()
+  private productService = inject(ProductService)
+  private router = inject(Router)
+  private fb = inject(FormBuilder)
 
-  formGroup = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    price: new FormControl(0, [Validators.required, Validators.min(0.01)]),
-    rating: new FormControl(0, [Validators.min(1)]),
+  productId = input<number>()
+
+  formGroup = this.fb.nonNullable.group({
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    price: [0, [Validators.required, Validators.min(0.01)]],
+    rating: [0, [Validators.min(1)]],
   })
 
   constructor() {
     effect(() => {
-      const product = this.product()
-      if (product) {
-        this.formGroup.patchValue({
-          name: product.name,
-          price: product.price,
-          rating: product.rating,
+      const productId = this.productId()
+      if (productId) {
+        this.productService.getById(productId).subscribe((product) => {
+          this.formGroup.patchValue({
+            name: product.name,
+            price: product.price,
+            rating: product.rating,
+          })
         })
       }
     })
-
-    setTimeout(() => {
-      this.formGroup.controls.name.setValue('Hello')
-    }, 3000)
   }
 
   onSubmit() {
     this.formGroup.markAllAsTouched()
     if (this.formGroup.invalid) return
 
-    console.log('Form value:', this.formGroup.value)
+    const formValue = this.formGroup.getRawValue()
+
+    const productId = this.productId()
+    if (productId) {
+      // Update
+      this.productService.update(productId, formValue).subscribe(() => {
+        this.router.navigate(['/products'])
+      })
+    } else {
+      // Create
+      this.productService.create(formValue).subscribe(() => {
+        this.router.navigate(['/products'])
+      })
+    }
   }
 }
