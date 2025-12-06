@@ -1,59 +1,50 @@
-# AngularSignalsVsReactivesForms
+# Angular Forms Comparison
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+A simple Angular 21 application that compares **Reactive Forms** with **Signal Forms** side by side.
 
-## Development server
+## Purpose
 
-To start a local development server, run:
+This project demonstrates the differences between two form approaches in Angular 21:
 
-```bash
-ng serve
-```
+- **Reactive Forms** (traditional approach using `FormGroup` and `FormControl`)
+- **Signal Forms** (new approach using Angular Signals and the `form()` function)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Both forms implement the same functionality (create and edit products) so you can easily compare their syntax, patterns, and behavior.
 
-## Code scaffolding
+## Features
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- ✅ Product list with CRUD operations
+- ✅ Create products using both form approaches
+- ✅ Edit products using both form approaches
+- ✅ Form validation with error messages
+- ✅ Custom rating input component
 
-```bash
-ng generate component component-name
-```
+## Key Differences
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Reactive Forms
 
-```bash
-ng generate --help
-```
+- Uses `FormGroup` and `FormControl`
+- Requires `ReactiveFormsModule`
+- Validation with `Validators`
+- Access values with `formGroup.value` or `formGroup.getRawValue()`
 
-## Building
+### Signal Forms
 
-To build the project run:
+- Uses `form()` function with signals
+- Built-in validation with `required()`, `minLength()`, `min()`, etc.
+- Access values with `form().value()`
+- More type-safe and reactive
 
-```bash
-ng build
-```
+## Custom Form Controls
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+The project also demonstrates how to create custom form controls for both approaches:
 
-## Running unit tests
+- **Reactive Forms**: Uses `ControlValueAccessor` interface
+  - Requires implementing `writeValue()`, `registerOnChange()`, `registerOnTouched()`
+  - More boilerplate code needed
+  - See `rating-input-old` component
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Signal Forms**: Uses `FormValueControl` interface
+  - Simply implement `value = model<T>()`
+  - Much simpler and cleaner API
+  - See `rating-input-new` component

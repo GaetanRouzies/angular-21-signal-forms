@@ -5,8 +5,27 @@
   $secondary: #6c757d
 );
 
-.container {
-  max-width: 800px;
+body {
+  background-image: url('/catalyseur-background.svg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.card {
+  width: fit-content;
+}
+
+app-reactive-product-form,
+app-signal-product-form {
+  width: 500px;
+  display: block;
+}
+
+app-product-list {
+  width: 800px;
+  display: block;
 }
 
 .ng-invalid.ng-dirty ~ .invalid-feedback,
