@@ -8,3 +8,13 @@
 .container {
   max-width: 800px;
 }
+
+.ng-invalid.ng-dirty ~ .invalid-feedback,
+.ng-invalid.ng-touched ~ .invalid-feedback {
+  display: block;
+}
+
+.form-control.ng-invalid.ng-dirty,
+.form-control.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}

@@ -3,13 +3,7 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
-    <input
-      id="name"
-      type="text"
-      formControlName="name"
-      class="form-control"
-      [class.is-invalid]="formGroup.controls.name.invalid && (formGroup.controls.name.touched || formGroup.controls.name.dirty)"
-    />
+    <input id="name" type="text" formControlName="name" class="form-control" />
     <small class="invalid-feedback">
       @if (formGroup.controls.name.hasError('required')) {
         Name is required
@@ -22,22 +16,13 @@
 
   <div class="mb-3">
     <label for="price" class="form-label">Price</label>
-    <input
-      id="price"
-      type="number"
-      formControlName="price"
-      class="form-control"
-      [class.is-invalid]="formGroup.controls.price.invalid && (formGroup.controls.price.touched || formGroup.controls.price.dirty)"
-    />
+    <input id="price" type="number" formControlName="price" class="form-control" />
     <small class="invalid-feedback"> Price must be at least 0.01 </small>
   </div>
 
   <div class="mb-3">
     <label class="form-label">Rating</label>
-    <app-rating-input-old
-      [class.is-invalid]="formGroup.controls.rating.invalid && (formGroup.controls.rating.touched || formGroup.controls.rating.dirty)"
-      formControlName="rating"
-    ></app-rating-input-old>
+    <app-rating-input-old formControlName="rating"></app-rating-input-old>
     <small class="invalid-feedback"> Rating must be at least 1 </small>
   </div>
 

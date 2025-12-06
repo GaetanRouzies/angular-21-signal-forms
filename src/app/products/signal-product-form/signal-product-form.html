@@ -3,13 +3,7 @@
 <form (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
-    <input
-      id="name"
-      type="text"
-      [field]="form.name"
-      class="form-control"
-      [class.is-invalid]="form.name().invalid() && (form.name().touched() || form.name().dirty())"
-    />
+    <input id="name" type="text" [field]="form.name" class="form-control" />
     @for (error of form.name().errors(); track error.kind) {
       <small class="invalid-feedback">{{ error.message }}</small>
     }
@@ -17,13 +11,7 @@
 
   <div class="mb-3">
     <label for="price" class="form-label">Price</label>
-    <input
-      id="price"
-      type="number"
-      [field]="form.price"
-      class="form-control"
-      [class.is-invalid]="form.price().invalid() && (form.price().touched() || form.price().dirty())"
-    />
+    <input id="price" type="number" [field]="form.price" class="form-control" />
     @for (error of form.price().errors(); track error.kind) {
       <small class="invalid-feedback">{{ error.message }}</small>
     }
@@ -31,10 +19,7 @@
 
   <div class="mb-3">
     <label class="form-label">Rating</label>
-    <app-rating-input-new
-      [field]="form.rating"
-      [class.is-invalid]="form.rating().invalid() && (form.rating().touched() || form.rating().dirty())"
-    ></app-rating-input-new>
+    <app-rating-input-new [field]="form.rating"></app-rating-input-new>
     @for (error of form.rating().errors(); track error.kind) {
       <small class="invalid-feedback">{{ error.message }}</small>
     }
