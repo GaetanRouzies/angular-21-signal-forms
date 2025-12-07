@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "name": "Product 1 Hello",
+      "name": "Product 1",
       "price": 19.99,
       "rating": 4,
       "id": 1
