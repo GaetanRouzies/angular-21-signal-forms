@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "angular-signals-vs-reactives-forms": {
+    "angular-21-signal-forms": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -29,9 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -61,10 +59,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-signals-vs-reactives-forms:build:production"
+              "buildTarget": "angular-21-signal-forms:build:production"
             },
             "development": {
-              "buildTarget": "angular-signals-vs-reactives-forms:build:development"
+              "buildTarget": "angular-21-signal-forms:build:development"
             }
           },
           "defaultConfiguration": "development"

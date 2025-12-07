@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router'
 import { RatingInputOld } from '../../shared/rating-input-old/rating-input-old'
 import { ProductService } from '../product.service'
-import { Product } from '../product.interface'
+import { Product } from '../product.model'
 
 @Component({
   selector: 'app-reactive-product-form',

@@ -2,7 +2,7 @@ import { Component, effect, inject, input, signal } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { Field, form, min, minLength, required } from '@angular/forms/signals'
 import { Router, RouterModule } from '@angular/router'
-import { Product } from '../product.interface'
+import { Product } from '../product.model'
 import { RatingInputNew } from '../../shared/rating-input-new/rating-input-new'
 import { ProductService } from '../product.service'
 
